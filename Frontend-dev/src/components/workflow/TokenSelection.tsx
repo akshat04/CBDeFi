@@ -24,7 +24,7 @@ const availableTokens: Token[] = [
     id: "winr",
     name: "wINR",
     symbol: "wINR",
-    balance: "2,500.00",
+    balance: "20,000.00",
     usdValue: "30.12",
     icon: "🪙"
   },

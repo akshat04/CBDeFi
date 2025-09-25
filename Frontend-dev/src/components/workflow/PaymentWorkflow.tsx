@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { PaymentInitiation } from "./PaymentInitiation";
+import { KYCRequirement } from "./KYCRequirement";
 import { TokenSelection } from "./TokenSelection";
 import { TokenValidation } from "./TokenValidation";
 import { TransactionPreparation } from "./TransactionPreparation";
@@ -14,7 +15,7 @@ import { Progress } from "@/components/ui/progress";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 
-type WorkflowStep = 'initiation' | 'tokenSelection' | 'validation' | 'preparation' | 'wallet' | 'aml' | 'balance' | 'signing' | 'settlement' | 'complete';
+type WorkflowStep = 'initiation' | 'kyc' | 'tokenSelection' | 'validation' | 'preparation' | 'wallet' | 'aml' | 'balance' | 'signing' | 'settlement' | 'complete';
 
 interface Token {
   id: string;
@@ -37,6 +38,7 @@ export function PaymentWorkflow() {
 
   const steps = [
     { id: 'initiation', label: 'Payment Initiation', description: 'Enter amount & method' },
+    { id: 'kyc', label: 'KYC Check', description: 'Verification requirement' },
     { id: 'tokenSelection', label: 'Token Selection', description: 'Choose crypto token' },
     { id: 'validation', label: 'Token Validation', description: 'Verify & validate' },
     { id: 'preparation', label: 'Transaction Review', description: 'Review & confirm' },
@@ -57,8 +59,18 @@ export function PaymentWorkflow() {
           <PaymentInitiation
             onNext={(data) => {
               setPaymentData(data);
-              setCurrentStep('tokenSelection');
+              const amount = parseFloat(data.amount.replace(/[^\d.]/g, ''));
+              setCurrentStep(amount >= 10000 ? 'kyc' : 'tokenSelection');
             }}
+          />
+        );
+      
+      case 'kyc':
+        return (
+          <KYCRequirement
+            amount={paymentData?.amount || '0'}
+            onNext={() => setCurrentStep('tokenSelection')}
+            onBack={() => setCurrentStep('initiation')}
           />
         );
       
@@ -70,7 +82,10 @@ export function PaymentWorkflow() {
               setSelectedToken(token);
               setCurrentStep('validation');
             }}
-            onBack={() => setCurrentStep('initiation')}
+            onBack={() => {
+              const amount = parseFloat(paymentData?.amount.replace(/[^\d.]/g, '') || '0');
+              setCurrentStep(amount >= 10000 ? 'kyc' : 'initiation');
+            }}
           />
         );
       
