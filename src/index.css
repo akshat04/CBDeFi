@@ -1,0 +1,199 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* CBDeFi Payment Gateway Design System - Professional Fintech Theme */
+
+@layer base {
+  :root {
+    /* Core Background & Surfaces */
+    --background: 220 26% 7%;
+    --foreground: 210 20% 95%;
+    --surface: 220 22% 10%;
+    --surface-elevated: 220 20% 13%;
+
+    /* Card & Popover */
+    --card: 220 22% 10%;
+    --card-foreground: 210 20% 95%;
+    --popover: 220 20% 13%;
+    --popover-foreground: 210 20% 95%;
+
+    /* Primary Brand - Deep Blue */
+    --primary: 240 100% 65%;
+    --primary-foreground: 0 0% 100%;
+    --primary-muted: 240 60% 45%;
+    --primary-hover: 240 100% 70%;
+
+    /* Secondary - Elegant Purple */
+    --secondary: 270 80% 60%;
+    --secondary-foreground: 0 0% 100%;
+    --secondary-muted: 270 50% 40%;
+
+    /* Success & Transaction */
+    --success: 140 70% 50%;
+    --success-foreground: 0 0% 100%;
+    --success-muted: 140 50% 35%;
+
+    /* Warning & Validation */
+    --warning: 35 100% 55%;
+    --warning-foreground: 0 0% 100%;
+    --warning-muted: 35 80% 40%;
+
+    /* Muted & Subtle */
+    --muted: 220 15% 20%;
+    --muted-foreground: 210 15% 65%;
+
+    /* Accent - Crypto Green */
+    --accent: 140 70% 50%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive & Error */
+    --destructive: 0 80% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders & Inputs */
+    --border: 220 15% 25%;
+    --input: 220 15% 25%;
+    --ring: 240 100% 65%;
+
+    /* Design System Extensions */
+    --gradient-primary: linear-gradient(135deg, hsl(240 100% 65%), hsl(270 80% 60%));
+    --gradient-success: linear-gradient(135deg, hsl(140 70% 50%), hsl(120 60% 45%));
+    --gradient-surface: linear-gradient(145deg, hsl(220 22% 10%), hsl(220 20% 13%));
+    --gradient-hero: linear-gradient(135deg, hsl(240 100% 65%) 0%, hsl(270 80% 60%) 50%, hsl(140 70% 50%) 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 20px hsl(220 26% 7% / 0.4);
+    --shadow-medium: 0 8px 32px hsl(220 26% 7% / 0.6);
+    --shadow-strong: 0 16px 48px hsl(220 26% 7% / 0.8);
+    --shadow-glow: 0 0 40px hsl(240 100% 65% / 0.3);
+
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  /* Light mode overrides (optional for fintech, dark is primary) */
+  .light {
+    --background: 0 0% 98%;
+    --foreground: 220 26% 7%;
+    --surface: 0 0% 100%;
+    --surface-elevated: 210 40% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 26% 7%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --border: 220 13% 91%;
+    --input: 220 13% 91%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-muted;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground;
+  }
+}
+
+@layer components {
+  /* Workflow step animations */
+  .step-fade-in {
+    animation: stepFadeIn 0.6s ease-out forwards;
+  }
+
+  .step-slide-in {
+    animation: stepSlideIn 0.5s ease-out forwards;
+  }
+
+  @keyframes stepFadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes stepSlideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Gradient backgrounds */
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .bg-gradient-success {
+    background: var(--gradient-success);
+  }
+
+  .bg-gradient-surface {
+    background: var(--gradient-surface);
+  }
+
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  /* Glass morphism effects */
+  .glass {
+    backdrop-filter: blur(16px);
+    background: hsl(var(--surface) / 0.8);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  .glass-elevated {
+    backdrop-filter: blur(20px);
+    background: hsl(var(--surface-elevated) / 0.9);
+    border: 1px solid hsl(var(--border) / 0.3);
+    box-shadow: var(--shadow-soft);
+  }
+}
