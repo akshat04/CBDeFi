@@ -6,20 +6,36 @@ import { Badge } from "@/components/ui/badge";
 import { CancelPaymentDialog } from "@/components/ui/cancel-payment-dialog";
 import { CheckCircle, Clock, CreditCard, ArrowRight, X } from "lucide-react";
 
+interface Token {
+  id: string;
+  name: string;
+  symbol: string;
+  balance: number;
+  inrValue: number;
+  icon: string;
+}
+
 interface TransactionPreparationProps {
   amount: string;
+  selectedToken?: Token;
   onProceed: () => void;
   onCancel: () => void;
 }
 
-export function TransactionPreparation({ amount, onProceed, onCancel }: TransactionPreparationProps) {
+export function TransactionPreparation({ amount, selectedToken, onProceed, onCancel }: TransactionPreparationProps) {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [showCancelDialog, setShowCancelDialog] = useState(false);
 
   const baseAmount = parseFloat(amount);
   const transactionFee = baseAmount * 0.01; // 1%
   const gst = transactionFee * 0.18; // 18% GST
-  const totalAmount = baseAmount + transactionFee + gst;
+  
+  // Swap calculations for non-wINR tokens
+  const isSwapRequired = selectedToken && selectedToken.symbol !== 'wINR';
+  const swapFee = isSwapRequired ? baseAmount * 0.005 : 0; // 0.5% swap fee
+  const swapAmount = isSwapRequired ? baseAmount / selectedToken.inrValue : 0;
+  
+  const totalAmount = baseAmount + transactionFee + gst + swapFee;
 
   if (showConfirmation) {
     return (
@@ -89,6 +105,25 @@ export function TransactionPreparation({ amount, onProceed, onCancel }: Transact
                 <span className="text-muted-foreground">Payment Amount</span>
                 <span className="font-semibold">₹{baseAmount.toFixed(2)}</span>
               </div>
+              
+              {isSwapRequired && (
+                <>
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground">Token Amount</span>
+                    <span className="font-semibold">{swapAmount.toFixed(6)} {selectedToken.symbol}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-muted-foreground">Swap Fee (0.5%)</span>
+                    <span className="font-semibold">₹{swapFee.toFixed(2)}</span>
+                  </div>
+                  <div className="bg-warning/10 border border-warning/20 rounded-lg p-3">
+                    <p className="text-sm text-warning-foreground">
+                      Your {selectedToken.symbol} will be swapped to wINR for payment processing
+                    </p>
+                  </div>
+                </>
+              )}
+              
               <div className="flex justify-between items-center">
                 <span className="text-muted-foreground">Transaction Fee (1%)</span>
                 <span className="font-semibold">₹{transactionFee.toFixed(2)}</span>
@@ -105,7 +140,7 @@ export function TransactionPreparation({ amount, onProceed, onCancel }: Transact
             </CardContent>
           </Card>
 
-          {/* Payment Method */}
+          {/* Payment Method 
           <Card className="bg-primary/5 border-primary/20">
             <CardContent className="p-4">
               <div className="flex items-center space-x-3">
@@ -119,9 +154,9 @@ export function TransactionPreparation({ amount, onProceed, onCancel }: Transact
                 </Badge>
               </div>
             </CardContent>
-          </Card>
+          </Card>*/}
 
-          {/* Processing Information */}
+          {/* Processing Information 
           <div className="bg-muted/20 rounded-lg p-4 space-y-2">
             <div className="flex items-center space-x-2">
               <Clock className="w-4 h-4 text-warning" />
@@ -131,7 +166,7 @@ export function TransactionPreparation({ amount, onProceed, onCancel }: Transact
               <CheckCircle className="w-4 h-4 text-success" />
               <span className="text-sm font-medium">RBI Compliant & KYC Verified</span>
             </div>
-          </div>
+          </div>*/}
 
           {/* Action Buttons */}
           <div className="grid grid-cols-2 gap-3">
@@ -141,7 +176,7 @@ export function TransactionPreparation({ amount, onProceed, onCancel }: Transact
             </Button>
             <Button variant="gradientSuccess" size="lg" onClick={onProceed}>
               <ArrowRight className="w-5 h-5" />
-              Proceed to Pay
+              Confirm Payment
             </Button>
           </div>
         </CardContent>

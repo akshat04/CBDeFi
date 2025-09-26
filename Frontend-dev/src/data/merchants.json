@@ -1,0 +1,37 @@
+[
+  {
+    "id": "1",
+    "phoneNumber": "9876543210",
+    "name": "Rajesh Kumar",
+    "businessName": "Kumar Electronics",
+    "profilePicture": "/src/assets/merchants/merchant1.jpg"
+  },
+  {
+    "id": "2", 
+    "phoneNumber": "9876543211",
+    "name": "Priya Sharma",
+    "businessName": "Sharma Textiles",
+    "profilePicture": "/src/assets/merchants/merchant2.jpg"
+  },
+  {
+    "id": "3",
+    "phoneNumber": "9876543212", 
+    "name": "Arjun Patel",
+    "businessName": "Patel Pharmacy",
+    "profilePicture": "/src/assets/merchants/merchant3.jpg"
+  },
+  {
+    "id": "4",
+    "phoneNumber": "9876543213",
+    "name": "Kavya Reddy",
+    "businessName": "Reddy Groceries", 
+    "profilePicture": "/src/assets/merchants/merchant4.jpg"
+  },
+  {
+    "id": "5",
+    "phoneNumber": "9876543214",
+    "name": "Vikram Singh",
+    "businessName": "Singh Auto Parts",
+    "profilePicture": "/src/assets/merchants/merchant5.jpg"
+  }
+]

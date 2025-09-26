@@ -8,10 +8,11 @@ import { CheckCircle, ArrowRightLeft, Building2, Flame, RefreshCw } from "lucide
 interface SettlementNotificationProps {
   amount: string;
   transactionHash: string;
-  onComplete: () => void;
+  onClose: () => void;
+  onMakeAnotherPayment: () => void;
 }
 
-export function SettlementNotification({ amount, transactionHash, onComplete }: SettlementNotificationProps) {
+export function SettlementNotification({ amount, transactionHash, onClose, onMakeAnotherPayment }: SettlementNotificationProps) {
   const [settlementStep, setSettlementStep] = useState(0);
   const [progress, setProgress] = useState(0);
 
@@ -115,9 +116,14 @@ export function SettlementNotification({ amount, transactionHash, onComplete }: 
           </CardContent>
         </Card>
 
-        <Button variant="gradientSuccess" className="w-full" onClick={onComplete}>
-          Complete Transaction
-        </Button>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Button variant="outline" className="w-full" onClick={onClose}>
+            Close
+          </Button>
+          <Button variant="gradientSuccess" className="w-full" onClick={onMakeAnotherPayment}>
+            Make Another Payment
+          </Button>
+        </div>
       </div>
     );
   };

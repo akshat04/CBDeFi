@@ -9,8 +9,8 @@ interface Token {
   id: string;
   name: string;
   symbol: string;
-  balance: string;
-  usdValue: string;
+  balance: number;
+  inrValue: number;
   icon: string;
 }
 
@@ -20,12 +20,21 @@ interface TokenValidationProps {
   onNext: () => void;
   onBack: () => void;
   onSwap: () => void;
+  onConfirmPayment: () => void;
+  onCancelPayment: () => void;
 }
 
-export function TokenValidation({ token, amount, onNext, onBack, onSwap }: TokenValidationProps) {
+export function TokenValidation({ token, amount, onNext, onBack, onSwap, onConfirmPayment, onCancelPayment }: TokenValidationProps) {
   const [validationStep, setValidationStep] = useState(0);
   const [hasWinr, setHasWinr] = useState(token.id === 'winr');
   const [progress, setProgress] = useState(0);
+  const [slippage, setSlippage] = useState("0.5");
+
+  // Calculate transaction details
+  const paymentAmount = parseFloat(amount);
+  const transactionFee = 1;
+  const gst = transactionFee * 0.18;
+  const totalAmount = paymentAmount + transactionFee + gst;
 
   const validationSteps = [
     "Checking token balance...",
@@ -88,10 +97,40 @@ export function TokenValidation({ token, amount, onNext, onBack, onSwap }: Token
             </CardContent>
           </Card>
 
-          <Button variant="gradientSuccess" size="lg" className="w-full" onClick={onNext}>
-            <ArrowRight className="w-5 h-5" />
-            Proceed to Transaction
-          </Button>
+          <Card className="border">
+            <CardHeader>
+              <CardTitle className="text-lg">Transaction Summary (INR)</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <div className="flex justify-between">
+                <span>Payment Amount</span>
+                <span>₹{paymentAmount.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>Transaction Fee</span>
+                <span>₹{transactionFee.toFixed(2)}</span>
+              </div>
+              <div className="flex justify-between">
+                <span>GST (18%)</span>
+                <span>₹{gst.toFixed(2)}</span>
+              </div>
+              <div className="border-t pt-2">
+                <div className="flex justify-between font-semibold">
+                  <span>Total Amount</span>
+                  <span>₹{totalAmount.toFixed(2)}</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="grid grid-cols-2 gap-3">
+            <Button variant="outline" onClick={onCancelPayment}>
+              Cancel Payment
+            </Button>
+            <Button variant="gradient" onClick={onConfirmPayment}>
+              Confirm Payment
+            </Button>
+          </div>
         </div>
       );
     }
@@ -106,25 +145,79 @@ export function TokenValidation({ token, amount, onNext, onBack, onSwap }: Token
           </p>
         </div>
 
+        <Card className="border">
+          <CardHeader>
+            <CardTitle className="text-lg">Transaction Details (INR)</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-3">
+            <div className="flex justify-between">
+              <span>Payment Amount</span>
+              <span>₹{paymentAmount.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Transaction Fee</span>
+              <span>₹{transactionFee.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>GST (18%)</span>
+              <span>₹{gst.toFixed(2)}</span>
+            </div>
+            <div className="border-t pt-2">
+              <div className="flex justify-between font-semibold">
+                <span>Total Amount</span>
+                <span>₹{totalAmount.toFixed(2)}</span>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         <Card className="bg-warning/10 border-warning/20">
-          <CardContent className="p-4 space-y-3">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">From: {token.symbol}</span>
-              <span className="text-sm">{amount} INR equivalent</span>
-            </div>
-            <div className="flex items-center justify-center">
-              <ArrowRight className="w-4 h-4 text-muted-foreground" />
-            </div>
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium">To: wINR</span>
-              <span className="text-sm">{amount} wINR</span>
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center gap-2">
+              <AlertTriangle className="w-5 h-5 text-warning" />
+              SWAP Required
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="space-y-3">
+              <div className="flex justify-between">
+                <span>Price ({token.symbol}-wINR)</span>
+                <span>
+                  {token.symbol === 'ETH' ? '2,08,823.53' : 
+                   token.symbol === 'BTC' ? '35,04,000.00' : 
+                   token.symbol === 'USDC' ? '83.50' : '1.00'} wINR
+                </span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span>Acceptable Slippage</span>
+                <div className="flex items-center gap-2">
+                  <input
+                    type="number"
+                    value={slippage}
+                    onChange={(e) => setSlippage(e.target.value)}
+                    className="w-16 px-2 py-1 text-sm border rounded text-black"
+                    step="0.1"
+                    min="0.1"
+                    max="5.0"
+                  />
+                  <span className="text-sm">%</span>
+                </div>
+              </div>
+              <div className="flex justify-between">
+                <span>Swap Qty (in {token.symbol})</span>
+                <span>
+                  {token.symbol === 'ETH' ? '0.00048' : 
+                   token.symbol === 'BTC' ? '0.000029' : 
+                   token.symbol === 'USDC' ? '1.214' : '101.18'} {token.symbol}
+                </span>
+              </div>
             </div>
           </CardContent>
         </Card>
 
         <div className="grid grid-cols-2 gap-3">
-          <Button variant="outline" onClick={onBack}>
-            Back
+          <Button variant="outline" onClick={onCancelPayment}>
+            Cancel Payment
           </Button>
           <Button variant="warning" onClick={onSwap}>
             Perform SWAP

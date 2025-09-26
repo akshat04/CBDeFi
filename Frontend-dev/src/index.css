@@ -2,75 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-/* CBDeFi Payment Gateway Design System - Professional Fintech Theme */
+/* CBDeFi Payment Gateway - Modern Web3/DeFi Design System */
 
 @layer base {
   :root {
-    /* Core Background & Surfaces */
-    --background: 220 26% 7%;
-    --foreground: 210 20% 95%;
-    --surface: 220 22% 10%;
-    --surface-elevated: 220 20% 13%;
+    /* Core Background & Surfaces - Deep Space Aesthetic */
+    --background: 231 23% 4%;
+    --foreground: 213 31% 91%;
+    --surface: 230 20% 7%;
+    --surface-elevated: 229 17% 10%;
 
-    /* Card & Popover */
-    --card: 220 22% 10%;
-    --card-foreground: 210 20% 95%;
-    --popover: 220 20% 13%;
-    --popover-foreground: 210 20% 95%;
+    /* Card & Popover - Elevated Glass */
+    --card: 230 20% 7%;
+    --card-foreground: 213 31% 91%;
+    --popover: 229 17% 10%;
+    --popover-foreground: 213 31% 91%;
 
-    /* Primary Brand - Deep Blue */
-    --primary: 240 100% 65%;
-    --primary-foreground: 0 0% 100%;
-    --primary-muted: 240 60% 45%;
-    --primary-hover: 240 100% 70%;
+    /* Primary - Electric Blue/Cyan */
+    --primary: 194 93% 68%;
+    --primary-foreground: 231 23% 4%;
+    --primary-muted: 194 60% 45%;
+    --primary-hover: 194 93% 75%;
 
-    /* Secondary - Elegant Purple */
-    --secondary: 270 80% 60%;
-    --secondary-foreground: 0 0% 100%;
-    --secondary-muted: 270 50% 40%;
+    /* Secondary - Neon Purple */
+    --secondary: 266 85% 78%;
+    --secondary-foreground: 231 23% 4%;
+    --secondary-muted: 266 60% 55%;
 
-    /* Success & Transaction */
-    --success: 140 70% 50%;
-    --success-foreground: 0 0% 100%;
-    --success-muted: 140 50% 35%;
+    /* Success - Crypto Green */
+    --success: 150 86% 65%;
+    --success-foreground: 231 23% 4%;
+    --success-muted: 150 60% 45%;
 
-    /* Warning & Validation */
-    --warning: 35 100% 55%;
-    --warning-foreground: 0 0% 100%;
-    --warning-muted: 35 80% 40%;
+    /* Warning - Vibrant Orange */
+    --warning: 25 95% 63%;
+    --warning-foreground: 231 23% 4%;
+    --warning-muted: 25 70% 45%;
 
     /* Muted & Subtle */
-    --muted: 220 15% 20%;
-    --muted-foreground: 210 15% 65%;
+    --muted: 230 15% 15%;
+    --muted-foreground: 229 13% 60%;
 
-    /* Accent - Crypto Green */
-    --accent: 140 70% 50%;
-    --accent-foreground: 0 0% 100%;
+    /* Accent - Electric Lime */
+    --accent: 84 100% 59%;
+    --accent-foreground: 231 23% 4%;
 
-    /* Destructive & Error */
-    --destructive: 0 80% 60%;
-    --destructive-foreground: 0 0% 100%;
+    /* Destructive - Neon Red */
+    --destructive: 348 83% 65%;
+    --destructive-foreground: 231 23% 4%;
 
-    /* Borders & Inputs */
-    --border: 220 15% 25%;
-    --input: 220 15% 25%;
-    --ring: 240 100% 65%;
+    /* Borders & Inputs - Subtle Glow */
+    --border: 230 15% 18%;
+    --input: 230 15% 15%;
+    --ring: 194 93% 68%;
 
-    /* Design System Extensions */
-    --gradient-primary: linear-gradient(135deg, hsl(240 100% 65%), hsl(270 80% 60%));
-    --gradient-success: linear-gradient(135deg, hsl(140 70% 50%), hsl(120 60% 45%));
-    --gradient-surface: linear-gradient(145deg, hsl(220 22% 10%), hsl(220 20% 13%));
-    --gradient-hero: linear-gradient(135deg, hsl(240 100% 65%) 0%, hsl(270 80% 60%) 50%, hsl(140 70% 50%) 100%);
+    /* Advanced Gradient System */
+    --gradient-primary: linear-gradient(135deg, hsl(194 93% 68%), hsl(266 85% 78%));
+    --gradient-secondary: linear-gradient(135deg, hsl(266 85% 78%), hsl(194 93% 68%));
+    --gradient-success: linear-gradient(135deg, hsl(150 86% 65%), hsl(84 100% 59%));
+    --gradient-surface: linear-gradient(145deg, hsl(230 20% 7%), hsl(229 17% 10%));
+    --gradient-hero: linear-gradient(135deg, hsl(194 93% 68%) 0%, hsl(266 85% 78%) 25%, hsl(150 86% 65%) 75%, hsl(84 100% 59%) 100%);
+    --gradient-neon: linear-gradient(90deg, hsl(194 93% 68%), hsl(266 85% 78%), hsl(150 86% 65%));
+    --gradient-cyber: linear-gradient(135deg, hsl(194 93% 68% / 0.1), hsl(266 85% 78% / 0.1));
     
-    /* Shadows */
-    --shadow-soft: 0 4px 20px hsl(220 26% 7% / 0.4);
-    --shadow-medium: 0 8px 32px hsl(220 26% 7% / 0.6);
-    --shadow-strong: 0 16px 48px hsl(220 26% 7% / 0.8);
-    --shadow-glow: 0 0 40px hsl(240 100% 65% / 0.3);
+    /* Enhanced Shadow System */
+    --shadow-soft: 0 4px 20px hsl(231 23% 4% / 0.5);
+    --shadow-medium: 0 8px 32px hsl(231 23% 4% / 0.7);
+    --shadow-strong: 0 16px 48px hsl(231 23% 4% / 0.9);
+    --shadow-glow-primary: 0 0 40px hsl(194 93% 68% / 0.4);
+    --shadow-glow-secondary: 0 0 40px hsl(266 85% 78% / 0.4);
+    --shadow-glow-success: 0 0 40px hsl(150 86% 65% / 0.4);
+    --shadow-neon: 0 0 20px hsl(194 93% 68% / 0.6), 0 0 40px hsl(266 85% 78% / 0.3);
 
-    /* Transitions */
+    /* Refined Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --transition-cyber: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
     --radius: 0.75rem;
 
@@ -166,9 +173,13 @@
     }
   }
 
-  /* Gradient backgrounds */
+  /* Enhanced Gradient System */
   .bg-gradient-primary {
     background: var(--gradient-primary);
+  }
+
+  .bg-gradient-secondary {
+    background: var(--gradient-secondary);
   }
 
   .bg-gradient-success {
@@ -183,17 +194,91 @@
     background: var(--gradient-hero);
   }
 
-  /* Glass morphism effects */
+  .bg-gradient-neon {
+    background: var(--gradient-neon);
+  }
+
+  .bg-gradient-cyber {
+    background: var(--gradient-cyber);
+  }
+
+  /* Advanced Glass Morphism */
   .glass {
     backdrop-filter: blur(16px);
     background: hsl(var(--surface) / 0.8);
     border: 1px solid hsl(var(--border) / 0.5);
+    transition: var(--transition-cyber);
   }
 
   .glass-elevated {
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(24px);
     background: hsl(var(--surface-elevated) / 0.9);
-    border: 1px solid hsl(var(--border) / 0.3);
-    box-shadow: var(--shadow-soft);
+    border: 1px solid hsl(var(--primary) / 0.2);
+    box-shadow: var(--shadow-soft), var(--shadow-glow-primary);
+    transition: var(--transition-cyber);
+  }
+
+  .glass-neon {
+    backdrop-filter: blur(20px);
+    background: hsl(var(--surface) / 0.7);
+    border: 1px solid hsl(var(--primary) / 0.3);
+    box-shadow: var(--shadow-neon);
+    transition: var(--transition-cyber);
+  }
+
+  /* Web3/DeFi UI Elements */
+  .cyber-border {
+    position: relative;
+    border: 1px solid transparent;
+    background: linear-gradient(hsl(var(--surface)), hsl(var(--surface))) padding-box,
+                var(--gradient-primary) border-box;
+  }
+
+  .neon-glow {
+    box-shadow: var(--shadow-glow-primary);
+    transition: var(--transition-cyber);
+  }
+
+  .neon-glow:hover {
+    box-shadow: var(--shadow-neon);
+    transform: translateY(-2px);
+  }
+
+  .pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes pulseGlow {
+    from {
+      box-shadow: var(--shadow-glow-primary);
+    }
+    to {
+      box-shadow: var(--shadow-neon), var(--shadow-glow-secondary);
+    }
+  }
+
+  /* Interactive Elements */
+  .interactive-card {
+    transition: var(--transition-cyber);
+    cursor: pointer;
+  }
+
+  .interactive-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-neon);
+    border-color: hsl(var(--primary) / 0.5);
+  }
+
+  /* Futuristic Text Effects */
+  .text-cyber {
+    background: var(--gradient-neon);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 600;
+  }
+
+  .text-glow {
+    text-shadow: 0 0 20px hsl(var(--primary) / 0.5);
   }
 }

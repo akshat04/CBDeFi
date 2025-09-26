@@ -9,13 +9,13 @@ export function Welcome() {
   const features = [
     {
       icon: <CreditCard className="w-8 h-8" />,
-      title: "Crypto to UPI",
-      description: "Pay any UPI merchant using your crypto tokens"
+      title: "Crypto to CBDC/UPI rails",
+      description: "Pay any CBDC/UPI merchant"
     },
     {
       icon: <Shield className="w-8 h-8" />,
       title: "Regulatory Compliant",
-      description: "Full KYC, AML, and tax compliance framework"
+      description: "KYC, AML and Tax Compliance framework"
     },
     {
       icon: <Zap className="w-8 h-8" />,
@@ -24,8 +24,8 @@ export function Welcome() {
     },
     {
       icon: <Globe className="w-8 h-8" />,
-      title: "CBDC Integration",
-      description: "Strengthening digital rupee circulation"
+      title: "e₹ backed Stablecoin",
+      description: "Get wINR for direct and instant payments "
     }
   ];
 
@@ -39,7 +39,7 @@ export function Welcome() {
               CBDeFi Payment Gateway
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Bridge crypto and traditional payments with regulatory-compliant CBDC-backed transactions
+              Bridge DeFi with TradFi
             </p>
           </div>
         </div>
@@ -81,7 +81,7 @@ export function Welcome() {
               onClick={() => navigate('/payment')}
             >
               <CreditCard className="w-6 h-6 mr-2" />
-              Make Payment
+              Connect Wallet
             </Button>
           </CardContent>
         </Card>

@@ -10,7 +10,7 @@ interface BalanceCheckProps {
     id: string;
     name: string;
     symbol: string;
-    balance: string;
+    balance: number;
   };
   amount: string;
   onNext: () => void;
@@ -21,7 +21,7 @@ interface BalanceCheckProps {
 export function BalanceCheck({ token, amount, onNext, onBack, onSwapRequired }: BalanceCheckProps) {
   const [checkStep, setCheckStep] = useState(0);
   const [progress, setProgress] = useState(0);
-  const normalize = (v: string) => Number(String(v).replace(/[^\d.-]/g, '').replace(/,/g, '')) || 0;
+  const normalize = (v: string | number) => Number(String(v).replace(/[^\d.-]/g, '').replace(/,/g, '')) || 0;
   const availableBalance = normalize(token.balance);
   const transactionAmount = normalize(amount);
   const insufficientBalance = availableBalance < transactionAmount;
@@ -82,7 +82,7 @@ export function BalanceCheck({ token, amount, onNext, onBack, onSwapRequired }: 
                 <div>
                   <p className="font-semibold text-destructive">Balance Insufficient</p>
                   <p className="text-sm text-muted-foreground">
-                    Required: ₹{amount} • Available: ₹{token.balance}
+                    Required: ₹{amount} • Available: ₹{token.balance.toLocaleString('en-IN')}
                   </p>
                 </div>
               </div>
@@ -113,7 +113,7 @@ export function BalanceCheck({ token, amount, onNext, onBack, onSwapRequired }: 
           <CardContent className="p-4 space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Available Balance</span>
-              <Badge variant="secondary" className="bg-success/20 text-success">₹{token.balance}</Badge>
+              <Badge variant="secondary" className="bg-success/20 text-success">₹{token.balance.toLocaleString('en-IN')}</Badge>
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Transaction Amount</span>

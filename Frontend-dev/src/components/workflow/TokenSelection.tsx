@@ -9,7 +9,7 @@ interface Token {
   name: string;
   symbol: string;
   balance: string;
-  usdValue: string;
+  inrValue: string;
   icon: string;
 }
 
@@ -24,8 +24,8 @@ const availableTokens: Token[] = [
     id: "winr",
     name: "wINR",
     symbol: "wINR",
-    balance: "20,000.00",
-    usdValue: "30.12",
+    balance: "250,000.00",
+    inrValue: "2,50,000.00",
     icon: "🪙"
   },
   {
@@ -33,7 +33,7 @@ const availableTokens: Token[] = [
     name: "Ethereum",
     symbol: "ETH",
     balance: "0.85",
-    usdValue: "2,125.45",
+    inrValue: "1,77,500.00",
     icon: "⟠"
   },
   {
@@ -41,7 +41,7 @@ const availableTokens: Token[] = [
     name: "Bitcoin",
     symbol: "BTC",
     balance: "0.045",
-    usdValue: "1,890.20",
+    inrValue: "1,57,680.00",
     icon: "₿"
   },
   {
@@ -49,7 +49,7 @@ const availableTokens: Token[] = [
     name: "USD Coin",
     symbol: "USDC",
     balance: "1,250.00",
-    usdValue: "1,250.00",
+    inrValue: "1,04,375.00",
     icon: "💵"
   }
 ];
@@ -90,7 +90,7 @@ export function TokenSelection({ amount, onNext, onBack }: TokenSelectionProps) 
                   </div>
                   <div className="text-right">
                     <p className="font-semibold">{token.balance} {token.symbol}</p>
-                    <p className="text-sm text-muted-foreground">${token.usdValue}</p>
+                    <p className="text-sm text-muted-foreground">₹{token.inrValue}</p>
                     {selectedToken?.id === token.id && (
                       <CheckCircle className="w-5 h-5 text-success mt-1 ml-auto" />
                     )}
